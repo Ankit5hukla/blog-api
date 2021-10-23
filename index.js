@@ -1,14 +1,12 @@
+require('dotenv').config()
 const chalk = require('chalk')
 const cors = require('cors')
 const path = require('path')
 const express = require('express')
 const expressValidator = require('express-validator')
 const morgan = require('morgan')
-const dotenv = require('dotenv')
 const db = require('mongoose')
 const apiRoute = require('./routes')
-dotenv.config()
-
 const app = express()
 
 const port = process.env.PORT || 7000
