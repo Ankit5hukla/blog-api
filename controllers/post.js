@@ -14,10 +14,35 @@ exports.postById = (req, res, next, id) => {
     photo: 1,
     postedBy: 1,
     title: 1,
+    slug: 1,
   })
     .populate('postedBy', { name: 1 })
-    // .populate('comments.postedBy', { name: 1 })
-    // .populate('postedBy', { name: 1, role: 1 })
+    .exec((error, post) => {
+      if (error || !post) {
+        return res.status(StatusCodes.NOT_FOUND).json({
+          error: error ? error.message : 'Post does not exist.',
+        })
+      }
+      req.post = post
+      next()
+    })
+}
+
+exports.postBySlug = (req, res, next, slug) => {
+  Post.findOne(
+    { slug: { $eq: slug } },
+    {
+      body: 1,
+      comments: 1,
+      createdAt: 1,
+      likes: 1,
+      photo: 1,
+      postedBy: 1,
+      title: 1,
+      slug: 1,
+    }
+  )
+    .populate('postedBy', { name: 1 })
     .exec((error, post) => {
       if (error || !post) {
         return res.status(StatusCodes.NOT_FOUND).json({
@@ -45,6 +70,10 @@ exports.getUserPosts = (req, res) => {
 }
 
 exports.getPost = (req, res) => {
+  res.json(req.post)
+}
+
+exports.getPostBySlug = (req, res) => {
   res.json(req.post)
 }
 

@@ -5,10 +5,12 @@ const { userById } = require('../controllers/user'),
     createPost,
     deletePost,
     getPost,
+    getPostBySlug,
     getPosts,
     getUserPosts,
     isPoster,
     postById,
+    postBySlug,
     updatePost,
   } = require('../controllers/post'),
   { requireSignIn } = require('../controllers/auth'),
@@ -30,9 +32,13 @@ postRoute.get('/id/:postId', getPost)
 postRoute.put('/id/:postId', requireSignIn, isPoster, updatePost)
 // Delete Post by postId
 postRoute.delete('/id/:postId', requireSignIn, isPoster, deletePost)
+// Get Post by slug
+postRoute.get('/slug/:slug', getPostBySlug)
 // Get All Posts
 postRoute.get('/', getPosts)
 
+// imp: Get Post when postId param is present in the request
+postRoute.param('slug', postBySlug)
 // imp: Get Post when postId param is present in the request
 postRoute.param('postId', postById)
 // imp: Get User when userId param is present in the request
