@@ -49,7 +49,7 @@ exports.getPost = (req, res) => {
 }
 
 exports.getPosts = (req, res) => {
-  Post.find({}, { author: 1, createdAt: 1, body: 1, title: 1 })
+  Post.find({}, { author: 1, createdAt: 1, title: 1, slug: 1, body: 1 })
     .populate('postedBy', { name: 1 })
     .then(posts =>
       res.status(StatusCodes.OK).json({

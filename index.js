@@ -29,9 +29,9 @@ app.use([
 
 app.use('/', apiRoute)
 
-// app.get('/favicon.ico', (req, res) => {
-//   res.status(404).end()
-// })
+app.get('/favicon.ico', (req, res) => {
+  res.status(404).end()
+})
 
 app.listen(port, () => {
   console.log(chalk.magenta(`Listening on port: ${chalk.bgWhite(port)} `))

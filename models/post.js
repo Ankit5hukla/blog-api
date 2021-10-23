@@ -1,5 +1,8 @@
-const db = require('mongoose')
-const { ObjectId } = db.Schema
+const db = require('mongoose'),
+  slug = require('mongoose-slug-generator'),
+  { ObjectId } = db.Schema
+
+db.plugin(slug)
 
 const postSchema = new db.Schema({
   title: {
@@ -8,11 +11,9 @@ const postSchema = new db.Schema({
     minLength: 5,
     maxLength: 150,
   },
+  slug: { type: String, slug: 'title', unique: true },
   body: {
     type: String,
-    required: 'Body is required',
-    minLength: 5,
-    maxLength: 2000,
   },
   featuredImg: {
     data: Buffer,
