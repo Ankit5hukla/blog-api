@@ -1,0 +1,80 @@
+[
+  {
+    "method": "POST",
+    "endpoint": "/auth/username-availability",
+    "description": "Check UserName Availability",
+    "auth": "Open"
+  },
+  {
+    "method": "POST",
+    "endpoint": "/auth/email-availability",
+    "description": "Check Email Availability",
+    "auth": "Open"
+  },
+  {
+    "method": "POST",
+    "endpoint": "/auth/sign-up",
+    "description": "New User Sign Up",
+    "auth": "Open"
+  },
+  {
+    "method": "POST",
+    "endpoint": "/auth/sign-in",
+    "description": "User Sign In",
+    "auth": "Open"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/post",
+    "description": "Show All Posts",
+    "auth": "Open"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/post/user/:userId",
+    "description": "Show User's Posts by userId",
+    "auth": "Sign In Require"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/post/id/:postId",
+    "description": "Show Post by postId",
+    "auth": "Open"
+  },
+  {
+    "method": "PUT",
+    "endpoint": "/post/id/:postId",
+    "description": "Update Post by postId",
+    "auth": "Sign In Require"
+  },
+  {
+    "method": "DELETE",
+    "endpoint": "/post/id/:postId",
+    "description": "Delete Post by postId",
+    "auth": "Sign In Require"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/user",
+    "description": "Show All Users",
+    "auth": "Open"
+  },
+  {
+    "method": "GET",
+    "endpoint": "/user/:userId",
+    "description": "Show User by userId",
+    "auth": "Sign In Require"
+  },
+  {
+    "method": "PUT",
+    "endpoint": "/user/:userId",
+    "description": "Update User by userId",
+    "auth": "Sign In Require"
+  },
+  {
+    "method": "DELETE",
+    "endpoint": "/user/:userId",
+    "description": "Delete User by userId",
+    "auth": "Sign In Require"
+  }
+]

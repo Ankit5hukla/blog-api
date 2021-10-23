@@ -1,0 +1,37 @@
+{
+  "name": "blog-evolve-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.1.0",
+    "express-validator": "^5.3.0",
+    "formidable": "^1.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.0.10",
+    "morgan": "^1.10.0",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.2",
+    "nodemon": "^2.0.13"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ankit5hukla/blog-evolve-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ankit5hukla/blog-evolve-api/issues"
+  },
+  "homepage": "https://github.com/Ankit5hukla/blog-evolve-api#readme"
+}
