@@ -5,6 +5,7 @@ const { userById } = require('../controllers/user'),
     createPost,
     deletePost,
     getPost,
+    getPostImage,
     getPostBySlug,
     getPosts,
     getUserPosts,
@@ -28,6 +29,8 @@ postRoute.post(
 postRoute.get('/user/:userId/:pageNum?/:limit?', requireSignIn, getUserPosts)
 // Get Post by postId
 postRoute.get('/id/:postId', getPost)
+// Get Post image by postId
+postRoute.get('/image/:postId', getPostImage)
 // update Post by postId
 postRoute.put('/id/:postId', requireSignIn, isPoster, updatePost)
 // Delete Post by postId

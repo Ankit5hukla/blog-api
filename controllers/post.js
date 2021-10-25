@@ -11,7 +11,7 @@ exports.postById = (req, res, next, id) => {
     comments: 1,
     createdAt: 1,
     likes: 1,
-    photo: 1,
+    featuredImg: 1,
     postedBy: 1,
     title: 1,
     slug: 1,
@@ -26,6 +26,11 @@ exports.postById = (req, res, next, id) => {
       req.post = post
       next()
     })
+}
+
+exports.getPostImage = (req, res) => {
+  res.set('Content-Type', req.post.featuredImg.contentType)
+  res.send(req.post.featuredImg.data)
 }
 
 exports.postBySlug = (req, res, next, slug) => {
@@ -166,9 +171,9 @@ exports.updatePost = (req, res, next) => {
       post = extend(post, fields)
       post.updatedAt = Date.now()
 
-      if (files.photo) {
-        post.photo.data = fs.readFileSync(files.photo.path)
-        post.photo.contentType = files.photo.type
+      if (files.featuredImg) {
+        post.featuredImg.data = fs.readFileSync(files.featuredImg.path)
+        post.featuredImg.contentType = files.featuredImg.type
       }
 
       post.save((err, result) => {
