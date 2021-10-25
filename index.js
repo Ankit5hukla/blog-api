@@ -20,7 +20,7 @@ db.connection.on('connected', a1 =>
 db.connection.on('error', err => console.error(chalk.red(err.message)))
 
 app.use([
-  morgan('dev'),
+  ...(process.env.NODE_ENV === 'development' ? [morgan('dev')] : []),
   // express.urlencoded({ extended: true }),
   express.json(),
   expressValidator(),
