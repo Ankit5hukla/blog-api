@@ -41,7 +41,7 @@ exports.postBySlug = (req, res, next, slug) => {
       comments: 1,
       createdAt: 1,
       likes: 1,
-      photo: 1,
+      featuredImg: 1,
       postedBy: 1,
       title: 1,
       slug: 1,
