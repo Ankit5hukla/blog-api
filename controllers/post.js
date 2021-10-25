@@ -15,7 +15,7 @@ const fs = require('fs'),
   }
 
 exports.postById = (req, res, next, id) => {
-  Post.findById(id, {
+  Post.findById(id.includes('.') ? id.split('.').reverse().pop() : id, {
     body: 1,
     comments: 1,
     createdAt: 1,
