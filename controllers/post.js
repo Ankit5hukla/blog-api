@@ -67,7 +67,8 @@ exports.getUserPosts = (req, res) => {
   Post.find({ postedBy: req.profile._id })
     .populate('postedBy', { name: 1 })
     .select({ title: 1, body: 1, createdAt: 1 })
-    .sort({ created: 1 })
+    .sort({ createdAt: 1 })
+
     .exec((error, posts) => {
       if (error) {
         return res.status(StatusCodes.BAD_REQUEST).json({
@@ -100,7 +101,7 @@ exports.getPosts = (req, res) => {
 
   Post.find({}, { author: 1, createdAt: 1, title: 1, slug: 1, body: 1 })
     .populate('postedBy', { name: 1 })
-    .sort({ created: -1 })
+    .sort({ createdAt: -1 })
     .then(posts => {
       res.status(StatusCodes.OK).json({
         currentPage,
