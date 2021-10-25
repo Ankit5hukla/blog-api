@@ -66,7 +66,7 @@ exports.getUserPosts = (req, res) => {
 
   Post.find({ postedBy: req.profile._id })
     .populate('postedBy', { name: 1 })
-    .select({ title: 1, body: 1, createdAt: 1 })
+    .select({ title: 1, createdAt: 1, slug: 1 })
     .sort({ createdAt: 1 })
 
     .exec((error, posts) => {
