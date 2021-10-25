@@ -55,6 +55,10 @@ exports.postBySlug = (req, res, next, slug) => {
 }
 
 exports.getUserPosts = (req, res) => {
+  const limit = req.params.limit ? parseInt(req.params.limit) : 10,
+    currentPage = req.params.pageNum ? parseInt(req.params.pageNum) : 1,
+    skip = limit * (currentPage - 1)
+
   Post.find({ postedBy: req.profile._id })
     .populate('postedBy', { name: 1 })
     .select({ title: 1, body: 1, createdAt: 1 })
@@ -65,7 +69,14 @@ exports.getUserPosts = (req, res) => {
           error: error,
         })
       }
-      res.json(posts)
+      res.status(StatusCodes.OK).json({
+        currentPage,
+        limit,
+        totalPages: Math.ceil(posts?.length / limit),
+        totalPosts: posts?.length,
+        posts: posts.slice(skip, skip + limit),
+      })
+      // res.json(posts)
     })
 }
 
@@ -78,13 +89,21 @@ exports.getPostBySlug = (req, res) => {
 }
 
 exports.getPosts = (req, res) => {
+  const limit = req.params.limit ? parseInt(req.params.limit) : 10,
+    currentPage = req.params.pageNum ? parseInt(req.params.pageNum) : 1,
+    skip = limit * (currentPage - 1)
+
   Post.find({}, { author: 1, createdAt: 1, title: 1, slug: 1, body: 1 })
     .populate('postedBy', { name: 1 })
-    .then(posts =>
+    .then(posts => {
       res.status(StatusCodes.OK).json({
-        posts,
+        currentPage,
+        limit,
+        totalPages: Math.ceil(posts?.length / limit),
+        totalPosts: posts?.length,
+        posts: posts.slice(skip, skip + limit),
       })
-    )
+    })
     .catch(error =>
       res.status(StatusCodes.BAD_REQUEST).json({
         error: error,

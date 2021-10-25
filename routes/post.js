@@ -25,7 +25,7 @@ postRoute.post(
   createPostValidator
 )
 // Get user Posts by userId
-postRoute.get('/user/:userId', requireSignIn, getUserPosts)
+postRoute.get('/user/:userId/:pageNum?/:limit?', requireSignIn, getUserPosts)
 // Get Post by postId
 postRoute.get('/id/:postId', getPost)
 // update Post by postId
@@ -35,7 +35,7 @@ postRoute.delete('/id/:postId', requireSignIn, isPoster, deletePost)
 // Get Post by slug
 postRoute.get('/slug/:slug', getPostBySlug)
 // Get All Posts
-postRoute.get('/', getPosts)
+postRoute.get('/:pageNum?/:limit?', getPosts)
 
 // imp: Get Post when postId param is present in the request
 postRoute.param('slug', postBySlug)
