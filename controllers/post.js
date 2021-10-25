@@ -1,9 +1,18 @@
 const fs = require('fs'),
+  imagemin = require('imagemin'),
+  mozJpeg = require('imagemin-mozjpeg'),
+  isJpg = require('is-jpg'),
   { extend } = require('lodash'),
-  { IncomingForm } = require('formidable')
+  { IncomingForm } = require('formidable'),
+  Post = require('../models/post'),
+  { StatusCodes } = require('../constants/status-codes'),
+  convertToJpg = async input => {
+    if (isJpg(input)) {
+      return input
+    }
 
-const Post = require('../models/post'),
-  { StatusCodes } = require('../constants/status-codes')
+    return sharp(input).jpeg().toBuffer()
+  }
 
 exports.postById = (req, res, next, id) => {
   Post.findById(id, {
@@ -121,7 +130,7 @@ exports.getPosts = (req, res) => {
 exports.createPost = (req, res) => {
   try {
     let form = new IncomingForm({ keepExtensions: true })
-    form.parse(req, (error, fields, files) => {
+    form.parse(req, async (error, fields, files) => {
       if (error) {
         return res.status(StatusCodes.BAD_REQUEST).json({
           error: error,
@@ -139,8 +148,13 @@ exports.createPost = (req, res) => {
       }
 
       if (files.featuredImg) {
-        post.featuredImg.data = fs.readFileSync(files.featuredImg.path)
         post.featuredImg.contentType = files.featuredImg.type
+        post.featuredImg.data = await imagemin.buffer(
+          fs.readFileSync(files.featuredImg.path),
+          {
+            plugins: [convertToJpg, mozJpeg({ quality: 85 })],
+          }
+        )
       }
 
       post.save((err, result) => {
@@ -149,7 +163,7 @@ exports.createPost = (req, res) => {
             error: err,
           })
         }
-        res.json(result)
+        res.json({ message: 'Post created successfully', _id: result._id })
       })
     })
   } catch (error) {
