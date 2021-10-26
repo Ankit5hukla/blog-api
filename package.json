@@ -1,5 +1,5 @@
 {
-  "name": "blog-evolve-api",
+  "name": "blog-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -38,7 +38,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Ankit5hukla/blog-evolve-api/issues"
+    "url": "https://github.com/Ankit5hukla/blog-api/issues"
   },
-  "homepage": "https://github.com/Ankit5hukla/blog-evolve-api#readme"
+  "homepage": "https://github.com/Ankit5hukla/blog-api#readme"
 }
